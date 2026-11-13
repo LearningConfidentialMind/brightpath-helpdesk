@@ -78,6 +78,8 @@ export function createHandler(assets) {
       const routes = {
         '/': ['src/index.html', 'text/html'],
         '/code': ['src/explainer.html', 'text/html'],
+        '/source': ['src/source.html', 'text/html'],
+        '/versions.js': ['src/versions.js', 'text/javascript'],
         '/styles.css': ['src/styles.css', 'text/css'],
         '/app.js': ['src/app.js', 'text/javascript'],
         '/explainer.js': ['src/explainer.js', 'text/javascript']
@@ -87,6 +89,26 @@ export function createHandler(assets) {
         return new Response(assets.text[route[0]], {
           headers: { 'Content-Type': route[1] + '; charset=utf-8', 'X-Content-Type-Options': 'nosniff' }
         });
+      }
+      if (request.method === 'GET' && url.pathname === '/api/versions') {
+        try {
+          const response = await fetch('https://api.github.com/repos/LearningConfidentialMind/brightpath-helpdesk/commits?sha=main&per_page=10', {
+            headers: { 'Accept': 'application/vnd.github+json', 'User-Agent': 'BrightPath-Helpdesk', 'X-GitHub-Api-Version': '2022-11-28' },
+            signal: AbortSignal.timeout(8000), cf: { cacheTtl: 60, cacheEverything: true }
+          });
+          if (!response.ok) throw new Error('GitHub unavailable');
+          const commits = await response.json();
+          if (!Array.isArray(commits)) throw new Error('Invalid GitHub response');
+          const versions = commits.slice(0, 10).map(commit => {
+            const date = commit.commit?.committer?.date || commit.commit?.author?.date;
+            if (!/^[a-f0-9]{40}$/.test(commit.sha) || !Number.isFinite(Date.parse(date))) throw new Error('Invalid commit');
+            return { sha: commit.sha, title: String(commit.commit?.message || '').split('\n')[0], date,
+              url: `https://github.com/LearningConfidentialMind/brightpath-helpdesk/commit/${commit.sha}` };
+          });
+          return json({ versions, checkedAt: new Date().toISOString() });
+        } catch {
+          return json({ error: 'GitHub history could not be loaded right now.' }, 503);
+        }
       }
       if (request.method === 'GET' && url.pathname === '/api/documents') return json(documents);
       if (request.method === 'GET' && url.pathname === '/api/source') return json(assets.catalog);

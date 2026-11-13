@@ -1,4 +1,5 @@
 const $ = id => document.getElementById(id);
+const codeOnly = document.body.dataset.view === 'source';
 let files = [];
 let activeFile;
 function element(tag, text, parent, className = '') {
@@ -13,7 +14,8 @@ function renderLines() {
   $('code-rows').replaceChildren();
   let shown = 0;
   activeFile.lines.forEach((line, index) => {
-    if (query && !`${line.code} ${line.explanation}`.toLowerCase().includes(query)) return;
+    const searchable = codeOnly ? line.code : `${line.code} ${line.explanation}`;
+    if (query && !searchable.toLowerCase().includes(query)) return;
     shown += 1;
     const row = element('div', '', $('code-rows'), 'line-row');
     row.id = `line-${index + 1}`;
@@ -22,7 +24,7 @@ function renderLines() {
     number.setAttribute('aria-label', `Line ${index + 1}`);
     const code = element('pre', '', row, 'line-code');
     element('code', line.code || ' ', code);
-    element('p', line.explanation, row, 'line-explanation');
+    if (!codeOnly) element('p', line.explanation, row, 'line-explanation');
   });
   $('code-status').textContent = `${shown} of ${activeFile.lines.length} lines shown · ${activeFile.path}`;
   if (!shown) element('p', 'No matching lines. Try another word or clear the search.', $('code-rows'));
@@ -50,7 +52,7 @@ async function loadSource() {
     const catalog = await response.json();
     files = catalog.files;
     if (!files.length) throw new Error('Source unavailable');
-    $('catalog-count').textContent = `${files.length} files · every line explained`;
+    $('catalog-count').textContent = `${files.length} files · ${codeOnly ? 'source only' : 'every line explained'}`;
     for (const file of files) {
       const button = element('button', file.title, $('file-list'));
       button.type = 'button';
@@ -64,7 +66,7 @@ async function loadSource() {
       document.getElementById(location.hash.slice(1))?.scrollIntoView();
     }
   } catch {
-    $('file-title').textContent = 'The source guide could not load';
+    $('file-title').textContent = 'The source files could not load';
     $('code-status').textContent = 'Please refresh the page to try again.';
     $('catalog-count').textContent = 'Files unavailable';
   }

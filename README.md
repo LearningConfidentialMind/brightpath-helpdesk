@@ -1,6 +1,6 @@
 # BrightPath Learn help desk
 
-[Live application](https://brightpath-helpdesk-jl.serihaldon.chatgpt.site/) · [Line-by-line code guide](https://brightpath-helpdesk-jl.serihaldon.chatgpt.site/code)
+[Live application](https://brightpath-helpdesk-jl.serihaldon.chatgpt.site/) · [Line-by-line code guide](https://brightpath-helpdesk-jl.serihaldon.chatgpt.site/code) · [Source without comments](https://brightpath-helpdesk-jl.serihaldon.chatgpt.site/source)
 
 Public fictional help desk with an integrated, line-by-line code guide at `/code`.
 The guide includes all hand-maintained runtime code, documents, automated checks,
@@ -28,7 +28,7 @@ Requires Node.js 20+; no dependencies or installation step.
 ```
 node scripts/build.mjs
 node scripts/validate-artifact.mjs
-node --test test.mjs
+node --test test.mjs test-versions.mjs
 ```
 
 The build fails if even one displayed source line differs from its actual file,
@@ -58,3 +58,9 @@ Generated with ChatGPT/Codex assistance. No client data is included.
 - `local-python/`: original Python application, tests, saved scenarios and setup instructions.
 
 The live cloud app uses JavaScript, not Python. The two implementations are separate. Hosting remains on the existing Site; pushing to GitHub does not redeploy it.
+
+## Repository links and versions
+
+The app navigation links to this public GitHub repository. `/source` shows actual source files with no comments or explanation column, while `/code` keeps the teaching guide.
+
+The home page shows the ten latest GitHub commits on main with commit ID, message and date/time in Europe/Helsinki. These are code versions, not deployment timestamps. The public GitHub API is read without credentials. History may be cached for up to one minute; API failures are shown clearly with a direct link to the complete history.

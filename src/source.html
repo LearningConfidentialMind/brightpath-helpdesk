@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Source code · BrightPath Learn</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/explainer.js" defer></script>
+</head>
+<body class="code-only" data-view="source">
+  <header>
+    <a class="brand" href="/">◈ BrightPath Learn</a>
+    <nav aria-label="Main navigation">
+      <a href="/">Help desk</a>
+      <a href="/code">Code explained</a>
+      <a href="/source" aria-current="page">Source code</a>
+      <a href="https://github.com/LearningConfidentialMind/brightpath-helpdesk" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+  <main class="code-main">
+    <span class="tag">Exact source · no comments</span>
+    <h1>Just the source code.</h1>
+    <p class="intro">Browse every cloud source file without comments or explanations mixed into the code. Choose a file to read or download it. For the original Python version, visit the GitHub repository.</p>
+    <div class="code-layout">
+      <aside class="card file-list">
+        <h2>Source files</h2>
+        <p class="foot" id="catalog-count">Loading source files…</p>
+        <div id="file-list" class="file-list-buttons"></div>
+      </aside>
+      <section class="card source-panel" aria-label="Source code without comments">
+        <div class="source-heading">
+          <span class="tag" id="file-language">Source code</span>
+          <h2 id="file-title">Loading source…</h2>
+          <p id="file-purpose" hidden></p>
+          <div class="toolbar">
+            <label for="line-search">Find a word in this file<input type="search" id="line-search" placeholder="Search source code…" disabled></label>
+            <a class="button" id="download-file" hidden>Download this file</a>
+          </div>
+        </div>
+        <p id="code-status" role="status" aria-live="polite">Loading…</p>
+        <div class="column-labels" aria-hidden="true"><span>#</span><span>Exact source code</span></div>
+        <div id="code-rows"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

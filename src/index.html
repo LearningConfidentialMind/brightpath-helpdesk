@@ -6,6 +6,7 @@
   <title>BrightPath · Learning help desk</title>
   <link rel="stylesheet" href="/styles.css">
   <script src="/app.js" defer></script>
+  <script src="/versions.js" defer></script>
 </head>
 <body>
   <header>
@@ -13,6 +14,8 @@
     <nav aria-label="Main navigation">
       <a href="/" aria-current="page">Help desk</a>
       <a href="/code">Code explained</a>
+      <a href="/source">Source code</a>
+      <a href="https://github.com/LearningConfidentialMind/brightpath-helpdesk" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </nav>
   </header>
   <main>
@@ -53,6 +56,16 @@
         <p class="foot">Public demo · no sign-in. Questions are not saved by this app. In real-model mode, the question and fictional documents go to the server's configured model. Never enter a password.</p>
       </aside>
     </div>
+    <section class="card versions" id="versions" aria-labelledby="versions-title">
+      <div class="versions-heading">
+        <div><span class="tag">Open source · main branch</span><h2 id="versions-title">GitHub versions</h2></div>
+        <button type="button" id="refresh-versions">Refresh versions</button>
+      </div>
+      <p>Each version is a GitHub commit. Dates and times use Europe/Helsinki time. These are code changes, not deployment timestamps.</p>
+      <p id="version-status" role="status" aria-live="polite">Loading GitHub history…</p>
+      <ol id="version-list" class="version-list"></ol>
+      <a href="https://github.com/LearningConfidentialMind/brightpath-helpdesk/commits/main/" target="_blank" rel="noopener noreferrer">View full version history on GitHub ↗</a>
+    </section>
   </main>
 </body>
 </html>
