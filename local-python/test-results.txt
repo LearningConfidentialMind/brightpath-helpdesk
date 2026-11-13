@@ -1,0 +1,13 @@
+test_failure (test_app.Tests.test_failure) ... ok
+test_model_transport_and_invalid_citation (test_app.Tests.test_model_transport_and_invalid_citation) ... ok
+test_supported (test_app.Tests.test_supported) ... ok
+test_unavailable_model (test_app.Tests.test_unavailable_model) ... ok
+test_unknown (test_app.Tests.test_unknown) ... ok
+test_validation (test_app.Tests.test_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.515s
+
+OK
+
+HTTP smoke checks: page, documents, supported answer (200), simulated failure (503): PASS

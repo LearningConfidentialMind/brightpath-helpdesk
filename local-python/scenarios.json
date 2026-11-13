@@ -1,0 +1,40 @@
+[
+  {
+    "question": "When is group coaching?",
+    "mode": "mock",
+    "simulate_failure": false,
+    "result": {
+      "answer": "A group coaching session takes place every Tuesday at 16:00 UTC.",
+      "supported": true,
+      "sources": [
+        {
+          "id": 2,
+          "title": "Coaching and feedback",
+          "excerpts": [
+            "A group coaching session takes place every Tuesday at 16:00 UTC."
+          ]
+        }
+      ],
+      "mode": "mock"
+    }
+  },
+  {
+    "question": "What is the refund policy?",
+    "mode": "mock",
+    "simulate_failure": false,
+    "result": {
+      "answer": "The information is not available in the supplied documents. Please contact support@brightpath.example. Never send your password.",
+      "supported": false,
+      "sources": [],
+      "mode": "mock"
+    }
+  },
+  {
+    "question": "When is group coaching?",
+    "mode": "mock",
+    "simulate_failure": true,
+    "result": {
+      "error": "Simulated model API failure. No answer was generated. Turn off the failure switch and try again."
+    }
+  }
+]
